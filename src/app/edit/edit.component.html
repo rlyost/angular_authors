@@ -1,0 +1,11 @@
+<div class='wrapper'>
+  <a [routerLink]="['/home']">Home</a>
+  <p>Edit this author:</p>
+  <form (submit)="onClickUpdate()" class="postForm">
+    <label>Name:
+        <input type="hidden" name="author._id" [(ngModel)]="author._id"/>
+        <input type='text' name='author.name' [(ngModel)]='author.name' placeholder='author.name' />
+    </label>
+    <input type="submit" value="Submit" />
+  </form>
+</div>
