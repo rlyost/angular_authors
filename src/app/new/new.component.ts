@@ -29,6 +29,7 @@ export class NewComponent implements OnInit {
         console.log("Got our post back!", data);
         this.newAuthor = {name: ""};
       });
+      goHome();
     };
   };
   goHome(){
