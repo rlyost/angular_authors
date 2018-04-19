@@ -8,6 +8,7 @@ import { HttpService } from '../http.service';
 })
 export class NewComponent implements OnInit {
   newAuthor = {};
+  name_error = "";
 
   constructor(private _httpService: HttpService){
   }
@@ -15,11 +16,15 @@ export class NewComponent implements OnInit {
   ngOnInit() {
   }
   onSubmit(){
-    let observable = this._httpService.addAuthor(this.newAuthor);
-    observable.subscribe(data => {
-      console.log("Got our post back!", data);
-      this.newAuthor = {name: ""};
-    });
+    if(this.newAuthor['name'].length < 3){
+      this.name_error = "A name must be at least 3 characters!"
+      console.log(this.name_error);
+    } else {
+      let observable = this._httpService.addAuthor(this.newAuthor);
+      observable.subscribe(data => {
+        console.log("Got our post back!", data);
+        this.newAuthor = {name: ""};
+      });
+    };
   };
-
 }

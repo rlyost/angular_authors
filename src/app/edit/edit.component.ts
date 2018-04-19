@@ -10,6 +10,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 export class EditComponent implements OnInit {
   author = [];
   id = {};
+  name_error = "";
 
   constructor(
     private _route: ActivatedRoute,
@@ -35,12 +36,17 @@ export class EditComponent implements OnInit {
   };
 
   onClickUpdate(){
-    let observable = this._httpService.updateAuthor(this.author);
-    observable.subscribe(data => {
-      console.log("Got our post back!", data);
-      this.author = [];
-    });
-    this._router.navigate(['/home']);
+    if(this.author['name'].length < 3){
+      this.name_error = "A name must be at least 3 characters!"
+      console.log(this.name_error);
+    } else {
+      let observable = this._httpService.updateAuthor(this.author);
+      observable.subscribe(data => {
+        console.log("Got our post back!", data);
+        this.author = [];
+      });
+      this._router.navigate(['/home']);
+    }
   };
 
 }

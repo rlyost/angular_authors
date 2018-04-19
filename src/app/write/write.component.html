@@ -1,12 +1,13 @@
 <div class='wrapper'>
   <a [routerLink]="['/home']">Home</a>
-  <p>Edit this author:</p>
-  <form (submit)="onClickUpdate()" class="postForm">
-    <label>Name:
+  <p>Provide a quote by {{ author.name }}:</p>
+  <form (submit)="onClickAdd()" class="postForm">
+    <label>Quote:
         <input type="hidden" name="author._id" [(ngModel)]="author._id"/>
-        <input type='text' name='author.name' [(ngModel)]='author.name' placeholder='author.name' />
+        <input type='text' name='newquote.quote' [(ngModel)]='newquote.quote' />
     </label>
     <input type="submit" value="Submit" />
   </form>
   <h3 style="color: red">{{ name_error }}</h3>
 </div>
+

@@ -6,7 +6,7 @@
     <tr><td><h3>Author</h3></td><td><h3> Actions available</h3></td></tr>
     <tr *ngFor="let author of authors">
       <td>{{ author.name }}</td>
-      <td><button [routerLink]="['/edit', author._id]">Edit</button><button (click)="onClickDestroy(author._id)">Delete</button></td>
+      <td><button [routerLink]="['/quotes', author._id]">View Quotes</button><button [routerLink]="['/edit', author._id]">Edit</button></td>
     </tr>
   </table>
 </div>
