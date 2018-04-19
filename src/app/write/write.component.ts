@@ -41,9 +41,13 @@ export class WriteComponent implements OnInit {
       let observable = this._httpService.addQuote(this.newquote);
       observable.subscribe(data => {
         console.log("Got our post back!", data);
+        console.log(this.id);
+        this.goBack(this.id);
         this.newquote = {quote: "", author_id: ""};
       });
     };
   };
-
+  goBack(id){
+    this._router.navigate(['/quotes', id]);
+  };
 }

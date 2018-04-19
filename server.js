@@ -30,7 +30,8 @@ var AuthorSchema = new mongoose.Schema({
             type: Number,
             default: 0
         }
-    }]}, { timestamps: true });
+    }]
+}, { timestamps: true });
 mongoose.model('Author', AuthorSchema);
 var Author = mongoose.model('Author');
 // Use native promises
@@ -106,15 +107,26 @@ app.put('/quote/new', function (req, res) {
 });
 app.put('/quote/update', function (req, res) {
     var rankup = req.body;
-    console.log("Rank:", req.body);
-    Author.update({ _id: rankup[2], 'quotes._id': rankup[0] }, { $set: {"quotes.$.rank": rankup[1] }}, function (err) {
+    Author.update({ _id: rankup[2], 'quotes._id': rankup[0] }, { $set: { "quotes.$.rank": rankup[1] } }, function (err) {
         // if there is an error console.log that something went wrong!
-        if(err) {
+        if (err) {
             console.log('something went wrong with new item save');
-            res.json({message: "Error", error: err});
+            res.json({ message: "Error", error: err });
         } else { // else console.log that we did well and then redirect to the root route
             console.log('successfully updated the DB!');
-            res.json({message: "Success"});
+            res.json({ message: "Success" });
+        };
+    });
+});
+app.put('/quote/remove', function (req, res) {
+    var ids = req.body;
+    Author.findOneAndUpdate({ _id: ids[0] }, { $pull: { "quotes": { _id: ids[1] } } }, function (err) {
+        if (err) {
+            console.log('something went wrong the destroy');
+            res.json({ message: "Error", error: err });
+        } else { // else console.log that we did well and then redirect to the root route
+            console.log('successfully removed quote!');
+            res.json({ message: "Success" });
         };
     });
 });

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-new',
@@ -10,7 +11,10 @@ export class NewComponent implements OnInit {
   newAuthor = {};
   name_error = "";
 
-  constructor(private _httpService: HttpService){
+  constructor(
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private _httpService: HttpService){
   }
 
   ngOnInit() {
@@ -27,4 +31,7 @@ export class NewComponent implements OnInit {
       });
     };
   };
+  goHome(){
+    this._router.navigate(['/home']);
+  }
 }
